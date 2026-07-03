@@ -1,0 +1,26 @@
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 15px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin-left: -4px; /* Align visually with padding */
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  text-align: center;
+}
+
+.header-right-placeholder {
+  width: 32px; /* Same roughly as back button + padding to center title */
+}

@@ -1,0 +1,132 @@
+.recipients-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.search-container {
+  padding: 0 15px 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-neutral);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.favorites-section {
+  padding: 0 15px 24px;
+  border-bottom: 8px solid #ebefee;
+}
+
+.all-recipients-section {
+  padding: 24px 15px;
+}
+
+.all-recipients-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-neutral);
+  margin-bottom: 16px;
+}
+
+.recipient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recipient-card {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 16px;
+}
+
+.recipient-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recipient-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-light);
+  object-fit: cover;
+}
+
+.recipient-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.recipient-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.recipient-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.recipient-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-send {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.primary-btn {
+  background-color: var(--brand-primary);
+  color: white;
+}
+
+.btn-details {
+  width: 86px;
+  background-color: var(--bg-surface);
+  color: var(--brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+}

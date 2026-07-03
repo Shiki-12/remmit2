@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --bg-body: #ebefee;
+  --bg-app: #f4f7f6;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  
+  --text-primary: #054f48; /* Dark teal for primary headings/amounts */
+  --text-neutral: #1f2937; /* Near black for general text */
+  --text-secondary: #6b7280; /* Gray for subtitles */
+  --text-tertiary: #9ca3af; /* Light gray */
+  --text-inverse: #ffffff;
+  
+  --brand-primary: #0f766e; /* Main teal */
+  --brand-secondary: #22c55e; /* Green */
+  --brand-tertiary: #0ea5e9; /* Blue */
+  --brand-neutral: #747877; /* Neutral gray */
+  --brand-success: #047857; /* Green for success states */
+  --brand-processing: #0ea5e9; /* Blue for processing */
+  
+  --border-light: #e5e7eb;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04);
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-blur: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-body);
+  color: var(--text-neutral);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 375px;
+  height: 100vh;
+  max-height: 812px;
+  background-color: var(--bg-app);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-light);
+}
+
+@media (max-width: 400px) {
+  #root {
+    max-height: 100vh;
+    border: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+}
+
+a:active {
+  transform: scale(0.98);
+}
+
+/* Global Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.1s; opacity: 0; }
+.stagger-3 { animation-delay: 0.15s; opacity: 0; }
+.stagger-4 { animation-delay: 0.2s; opacity: 0; }
+.stagger-5 { animation-delay: 0.25s; opacity: 0; }
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
