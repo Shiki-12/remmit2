@@ -1,203 +1,261 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, Plus, Wallet, Building, CheckCircle2, ArrowUpDown } from 'lucide-react';
+import { ArrowLeft, Search, Plus, ArrowUpDown, CheckCircle2, ChevronRight } from 'lucide-react';
 import './Transfer.css';
+
+interface FavoriteRecipient {
+  id: string;
+  name: string;
+  country: string;
+  destination: string;
+  flag: string;
+  avatar: string;
+}
+
+interface AllRecipient {
+  id: string;
+  name: string;
+  country: string;
+  destination: string;
+  lastTransfer: string;
+  status: string;
+  flag: string;
+  avatar: string;
+  isWallet: boolean;
+}
+
+const favoriteRecipients: FavoriteRecipient[] = [
+  {
+    id: "fav-001",
+    name: "Mama",
+    country: "Indonesia",
+    destination: "DANA Wallet",
+    flag: "https://flagcdn.com/w40/id.png",
+    avatar: "Mama"
+  },
+  {
+    id: "fav-002",
+    name: "Father",
+    country: "Indonesia",
+    destination: "BCA Bank",
+    flag: "https://flagcdn.com/w40/id.png",
+    avatar: "Father"
+  },
+  {
+    id: "fav-003",
+    name: "Brother",
+    country: "Indonesia",
+    destination: "OVO Wallet",
+    flag: "https://flagcdn.com/w40/id.png",
+    avatar: "Brother"
+  }
+];
+
+const allRecipients: AllRecipient[] = [
+  {
+    id: "rec-001",
+    name: "Talita Vicki",
+    country: "Indonesia",
+    destination: "DANA Wallet",
+    lastTransfer: "Yesterday",
+    status: "Verified Recipient",
+    flag: "https://flagcdn.com/w40/id.png",
+    avatar: "Talita Vicki",
+    isWallet: true
+  },
+  {
+    id: "rec-002",
+    name: "Juan Dela Cruz",
+    country: "Philippines",
+    destination: "BDO Bank",
+    lastTransfer: "2 days ago",
+    status: "Verified Recipient",
+    flag: "https://flagcdn.com/w40/ph.png",
+    avatar: "Juan Dela Cruz",
+    isWallet: false
+  },
+  {
+    id: "rec-003",
+    name: "Nur Aisyah",
+    country: "Singapore",
+    destination: "DBS Bank",
+    lastTransfer: "5 days ago",
+    status: "Verified Recipient",
+    flag: "https://flagcdn.com/w40/sg.png",
+    avatar: "Nur Aisyah",
+    isWallet: false
+  },
+  {
+    id: "rec-004",
+    name: "Minh Tran",
+    country: "Vietnam",
+    destination: "MoMo Wallet",
+    lastTransfer: "1 week ago",
+    status: "Verified Recipient",
+    flag: "https://flagcdn.com/w40/vn.png",
+    avatar: "Minh Tran",
+    isWallet: true
+  }
+];
 
 const Transfer: React.FC = () => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filtering logic for the list of all recipients
+  const filteredRecipients = allRecipients.filter((rec) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      rec.name.toLowerCase().includes(query) ||
+      rec.country.toLowerCase().includes(query) ||
+      rec.destination.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div className="transfer-container">
       {/* Header */}
-      <div className="top-header animate-fade-in-up stagger-1">
-        <button className="back-button" onClick={() => navigate(-1)}>
-          <ArrowLeft size={24} color="#0f766e" />
+      <header className="transfer-header animate-fade-in-up stagger-1">
+        <button className="back-button" onClick={() => navigate(-1)} aria-label="Go back">
+          <ArrowLeft size={24} color="var(--brand-primary)" />
         </button>
-        <h1 className="header-title">Send Money</h1>
+        <div className="header-text">
+          <h1 className="header-title">Send Money</h1>
+          <p className="header-subtitle">Choose a recipient to start your transfer.</p>
+        </div>
         <div className="header-right-placeholder" />
-      </div>
+      </header>
 
       {/* Search Bar */}
       <div className="transfer-search-container animate-fade-in-up stagger-2">
-        <div className="transfer-search-bar">
-          <Search size={20} color="var(--text-tertiary)" />
+        <div className="transfer-search-bar glass-panel">
+          <Search size={20} color="var(--text-tertiary)" className="search-icon" />
           <input 
             type="text" 
             className="transfer-search-input" 
             placeholder="Search recipient, bank, or wallet"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
 
-      {/* Favorite Recipients */}
-      <div className="transfer-section animate-fade-in-up stagger-3">
-        <div className="section-header">
-          <h2 className="section-title">Favorite Recipients</h2>
-          <button className="section-link">View All</button>
-        </div>
-        
-        <div className="favorites-list">
-          <div className="fav-item">
-            <div className="fav-avatar-wrapper">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Mama" alt="Mama" className="fav-avatar" />
-              <img src="https://flagcdn.com/w40/id.png" alt="ID" className="fav-flag" />
-            </div>
-            <span className="fav-name">Mama</span>
-            <span className="fav-country">Indonesia</span>
-            <span className="fav-wallet">DANA Wallet</span>
-          </div>
-
-          <div className="fav-item">
-            <div className="fav-avatar-wrapper">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Father" alt="Father" className="fav-avatar" />
-              <img src="https://flagcdn.com/w40/id.png" alt="ID" className="fav-flag" />
-            </div>
-            <span className="fav-name">Father</span>
-            <span className="fav-country">Indonesia</span>
-            <span className="fav-wallet">BCA Bank</span>
-          </div>
-
-          <div className="fav-item">
-            <div className="fav-avatar-wrapper">
-              <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Brother" alt="Brother" className="fav-avatar" />
-              <img src="https://flagcdn.com/w40/id.png" alt="ID" className="fav-flag" />
-            </div>
-            <span className="fav-name">Brother</span>
-            <span className="fav-country">Indonesia</span>
-            <span className="fav-wallet">OVO Wallet</span>
-          </div>
-
-          <div className="fav-item">
-            <button className="fav-add-btn">
-              <Plus size={24} />
+      {/* Favorite Recipients Section */}
+      {searchQuery === '' && (
+        <div className="transfer-section animate-fade-in-up stagger-3">
+          <div className="section-header">
+            <h2 className="section-title">Favorite Recipients</h2>
+            <button className="section-link" onClick={() => navigate('/transfers/recipients')}>
+              View All
             </button>
-            <span className="fav-name" style={{ color: 'var(--brand-primary)' }}>Add Recipient</span>
+          </div>
+          
+          <div className="favorites-horizontal-scroll">
+            {favoriteRecipients.map((fav) => (
+              <div 
+                key={fav.id} 
+                className="fav-item-card glass-panel"
+                onClick={() => navigate(`/transfers/new/${fav.id}`)}
+              >
+                <div className="fav-avatar-container">
+                  <img 
+                    src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(fav.avatar)}`} 
+                    alt={fav.name} 
+                    className="fav-avatar" 
+                  />
+                  <img src={fav.flag} alt={fav.country} className="fav-flag-badge" />
+                </div>
+                <span className="fav-name">{fav.name}</span>
+                <span className="fav-destination">{fav.destination}</span>
+              </div>
+            ))}
+
+            <div className="fav-item-card add-new-fav glass-panel" onClick={() => navigate('/transfers/recipients')}>
+              <div className="fav-avatar-container add-btn">
+                <Plus size={20} color="var(--brand-primary)" />
+              </div>
+              <span className="fav-name" style={{ color: 'var(--brand-primary)' }}>Add</span>
+              <span className="fav-destination">Recipient</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* All Recipients */}
+      {/* All Recipients Section */}
       <div className="transfer-section animate-fade-in-up stagger-4">
         <div className="section-header">
           <h2 className="section-title">All Recipients</h2>
-          <button className="section-link" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            Sort <ArrowUpDown size={16} />
+          <button className="section-sort-btn">
+            <span>Sort</span>
+            <ArrowUpDown size={14} />
           </button>
         </div>
 
         <div className="all-recipients-list">
-          <div className="tr-recipient-card glass-panel">
-            <div className="rc-left">
-              <div className="rc-avatar-wrapper">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Vicki" alt="Talita Vicki" className="rc-avatar" />
-                <img src="https://flagcdn.com/w40/id.png" alt="ID" className="rc-flag" />
-              </div>
-              <div className="rc-info">
-                <span className="rc-name">Talita Vicki</span>
-                <span className="rc-country">Indonesia</span>
-                <div className="rc-wallet">
-                  <Wallet size={14} /> DANA Wallet
+          {filteredRecipients.length > 0 ? (
+            filteredRecipients.map((rec) => (
+              <div key={rec.id} className="recipient-row-card glass-panel">
+                <div className="recipient-row-left">
+                  <div className="recipient-avatar-container">
+                    <img 
+                      src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(rec.avatar)}`} 
+                      alt={rec.name} 
+                      className="recipient-avatar" 
+                    />
+                    <img src={rec.flag} alt={rec.country} className="recipient-flag-badge" />
+                  </div>
+                  
+                  <div className="recipient-details-col">
+                    <div className="recipient-name-row">
+                      <span className="recipient-fullname">{rec.name}</span>
+                      <span className="verified-badge">
+                        <CheckCircle2 size={11} className="verified-icon" />
+                        <span>Verified</span>
+                      </span>
+                    </div>
+                    
+                    <span className="recipient-destination-info">
+                      {rec.country} • {rec.destination}
+                    </span>
+                    
+                    <div className="last-transfer-info">
+                      <span className="last-transfer-lbl">Last transfer: </span>
+                      <span className="last-transfer-val">{rec.lastTransfer}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="rc-verified">
-                  <CheckCircle2 size={12} /> Verified Recipient
-                </div>
-              </div>
-            </div>
-            <div className="rc-right">
-              <div className="rc-last-transfer">
-                <span className="rc-lt-label">Last transfer</span>
-                <span className="rc-lt-value">Yesterday</span>
-              </div>
-              <button className="rc-continue-btn">Continue</button>
-            </div>
-          </div>
 
-          <div className="tr-recipient-card glass-panel">
-            <div className="rc-left">
-              <div className="rc-avatar-wrapper">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Juan" alt="Juan Dela Cruz" className="rc-avatar" />
-                <img src="https://flagcdn.com/w40/ph.png" alt="PH" className="rc-flag" />
+                <button 
+                  className="continue-btn"
+                  onClick={() => navigate(`/transfers/new/${rec.id}`)}
+                >
+                  <span>Continue</span>
+                  <ChevronRight size={14} />
+                </button>
               </div>
-              <div className="rc-info">
-                <span className="rc-name">Juan Dela Cruz</span>
-                <span className="rc-country">Philippines</span>
-                <div className="rc-wallet">
-                  <Building size={14} /> BDO Bank
-                </div>
-                <div className="rc-verified">
-                  <CheckCircle2 size={12} /> Verified Recipient
-                </div>
-              </div>
+            ))
+          ) : (
+            <div className="empty-state-container glass-panel">
+              <p className="empty-title">No recipients found</p>
+              <p className="empty-subtitle">Try another name, bank, or wallet.</p>
+              <button className="empty-add-btn" onClick={() => navigate('/transfers/recipients')}>
+                <Plus size={16} />
+                <span>Add New Recipient</span>
+              </button>
             </div>
-            <div className="rc-right">
-              <div className="rc-last-transfer">
-                <span className="rc-lt-label">Last transfer</span>
-                <span className="rc-lt-value">2 days ago</span>
-              </div>
-              <button className="rc-continue-btn">Continue</button>
-            </div>
-          </div>
-
-          <div className="tr-recipient-card glass-panel">
-            <div className="rc-left">
-              <div className="rc-avatar-wrapper">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Aisyah" alt="Nur Aisyah" className="rc-avatar" />
-                <img src="https://flagcdn.com/w40/sg.png" alt="SG" className="rc-flag" />
-              </div>
-              <div className="rc-info">
-                <span className="rc-name">Nur Aisyah</span>
-                <span className="rc-country">Singapore</span>
-                <div className="rc-wallet">
-                  <Building size={14} /> DBS Bank
-                </div>
-                <div className="rc-verified">
-                  <CheckCircle2 size={12} /> Verified Recipient
-                </div>
-              </div>
-            </div>
-            <div className="rc-right">
-              <div className="rc-last-transfer">
-                <span className="rc-lt-label">Last transfer</span>
-                <span className="rc-lt-value">5 days ago</span>
-              </div>
-              <button className="rc-continue-btn">Continue</button>
-            </div>
-          </div>
-
-          <div className="tr-recipient-card glass-panel">
-            <div className="rc-left">
-              <div className="rc-avatar-wrapper">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Minh" alt="Minh Tran" className="rc-avatar" />
-                <img src="https://flagcdn.com/w40/vn.png" alt="VN" className="rc-flag" />
-              </div>
-              <div className="rc-info">
-                <span className="rc-name">Minh Tran</span>
-                <span className="rc-country">Vietnam</span>
-                <div className="rc-wallet">
-                  <Wallet size={14} /> MoMo Wallet
-                </div>
-                <div className="rc-verified">
-                  <CheckCircle2 size={12} /> Verified Recipient
-                </div>
-              </div>
-            </div>
-            <div className="rc-right">
-              <div className="rc-last-transfer">
-                <span className="rc-lt-label">Last transfer</span>
-                <span className="rc-lt-value">1 week ago</span>
-              </div>
-              <button className="rc-continue-btn">Continue</button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
-      <div className="add-new-container animate-fade-in-up stagger-5">
-        <button className="btn-dashed-large">
-          <Plus size={20} /> Add New Recipient
-        </button>
-      </div>
-
+      {/* Add New Recipient CTA */}
+      {filteredRecipients.length > 0 && (
+        <div className="add-recipient-cta-container animate-fade-in-up stagger-5">
+          <button className="dashed-add-btn" onClick={() => navigate('/transfers/recipients')}>
+            <Plus size={20} />
+            <span>Add New Recipient</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Eye, Plus, ArrowDown, ArrowLeftRight, FileText, ChevronRight } from 'lucide-react';
 import './Wallet.css';
 
 const Wallet: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="wallet-page-container">
       {/* Balance Card */}
@@ -24,7 +27,7 @@ const Wallet: React.FC = () => {
 
       {/* Quick Actions */}
       <div className="wallet-actions animate-fade-in-up stagger-2">
-        <button className="w-action-btn">
+        <button className="w-action-btn" onClick={() => navigate('/wallet/add-funds')}>
           <div className="w-action-icon-wrapper">
             <Plus size={24} />
           </div>

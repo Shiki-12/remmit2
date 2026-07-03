@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bell, ArrowUpRight, Plus, Users, SplitSquareHorizontal, Eye, ChevronRight, ArrowUp, Send, Share2, Download, Receipt } from 'lucide-react';
+import { Bell, Plus, Users, Eye, ChevronRight, ArrowUp, Send, Receipt } from 'lucide-react';
 import ContactAvatar from '../components/ContactAvatar';
 import './Dashboard.css';
 
@@ -68,28 +68,28 @@ const Dashboard: React.FC = () => {
 
       {/* Quick Actions */}
       <div className="quick-actions-wrapper animate-fade-in-up stagger-3">
-        <button className="quick-action-item" onClick={() => navigate('/transfer')}>
+        <button className="quick-action-item" onClick={() => navigate('/transfers/new')}>
           <div className="action-icon-square primary">
             <Send size={24} />
           </div>
           <span className="action-label">Send</span>
         </button>
         
-        <button className="quick-action-item" onClick={() => navigate('/add-funds')}>
+        <button className="quick-action-item" onClick={() => navigate('/wallet/add-funds')}>
           <div className="action-icon-square">
             <Plus size={24} />
           </div>
           <span className="action-label">Add Funds</span>
         </button>
         
-        <button className="quick-action-item" onClick={() => navigate('/recipients')}>
+        <button className="quick-action-item" onClick={() => navigate('/transfers/recipients')}>
           <div className="action-icon-square">
             <Users size={24} />
           </div>
           <span className="action-label">Recepients</span>
         </button>
         
-        <button className="quick-action-item">
+        <button className="quick-action-item" onClick={() => navigate('/smart-split')}>
           <div className="action-icon-square">
             <Receipt size={24} />
           </div>
@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
       <div className="animate-fade-in-up stagger-5">
         <div className="section-header">
           <h2 className="section-title">Favorites</h2>
-          <button className="section-link" onClick={() => navigate('/recipients')}>View All</button>
+          <button className="section-link" onClick={() => navigate('/transfers/recipients')}>View All</button>
         </div>
         <div className="favorites-list">
           <ContactAvatar name="Mama" isActive />
@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
       <div className="animate-fade-in-up stagger-5" style={{ paddingBottom: '32px' }}>
         <div className="section-header">
           <h2 className="section-title">Recent Activities</h2>
-          <button className="section-link">See History</button>
+          <button className="section-link" onClick={() => navigate('/transfers')}>See History</button>
         </div>
         <div className="activities-list">
           <a href="#" className="activity-item glass-panel">

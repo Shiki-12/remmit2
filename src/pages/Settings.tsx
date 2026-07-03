@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Globe, Bell, Shield, Lock, Headphones, Info, LogOut, ChevronRight } from 'lucide-react';
 import './Settings.css';
 
 const Settings: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="settings-container">
       <div className="top-header animate-fade-in-up stagger-1" style={{ justifyContent: 'center' }}>
@@ -10,7 +13,11 @@ const Settings: React.FC = () => {
       </div>
 
       {/* User Profile Card */}
-      <a href="#" className="profile-card glass-panel animate-fade-in-up stagger-2">
+      <div 
+        onClick={() => navigate('/profile')} 
+        className="profile-card glass-panel animate-fade-in-up stagger-2"
+        style={{ cursor: 'pointer' }}
+      >
         <div className="profile-left">
           <img 
             className="profile-avatar" 
@@ -23,7 +30,7 @@ const Settings: React.FC = () => {
           </div>
         </div>
         <ChevronRight size={20} color="var(--text-tertiary)" />
-      </a>
+      </div>
 
       {/* Account Section */}
       <div className="animate-fade-in-up stagger-3">

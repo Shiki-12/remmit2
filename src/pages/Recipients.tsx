@@ -62,7 +62,7 @@ const Recipients: React.FC = () => {
                 </div>
               </div>
               <div className="recipient-actions">
-                <button className="btn-send primary-btn">
+                <button className="btn-send primary-btn" onClick={() => navigate('/transfers/new')}>
                   <Send size={16} /> Send
                 </button>
                 <button className="btn-details" style={{ color: '#0f766e', borderColor: 'var(--border-light)' }}>Details</button>
